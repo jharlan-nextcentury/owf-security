@@ -1,26 +1,28 @@
-# OS generated files #
-######################
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-#Icon?
-ehthumbs.db
+### Gradle template
+.gradle/
+build/
+
+
+### JetBrains (IntelliJ)
+.idea/
+
+## Plugin-specific files:
+
+# IntelliJ
+out/
+
+
+### Windows
 Thumbs.db
-
-# IDE support files #
-#####################
-/.classpath
-/.project
-/.settings
-/lib
-/target-eclipse
-target
-*.iml
-.idea
-
-# Temporary files #
-###################
+ehthumbs.db
+ehthumbs_vista.db
 *.stackdump
-*.swp
+Desktop.ini
+
+
+### Mac OS
+# General
+*.DS_Store
+.AppleDouble
+.LSOverride
+._*

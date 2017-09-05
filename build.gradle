@@ -1,0 +1,88 @@
+group 'org.ozoneplatform'
+version '4.0.4-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'http://repository.springsource.com/maven/bundles/release' }
+    maven { url 'http://repository.springsource.com/maven/bundles/external' }
+}
+
+dependencies {
+
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+
+    compile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+
+    compile group: 'org.springframework.security', name: 'spring-security-core', version: '3.2.3.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-cas-client', version: '3.0.8.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-web', version: '3.2.3.RELEASE'
+    compile group: 'org.springframework', name: 'org.springframework.web', version: '3.2.3.RELEASE'
+    compile group: 'org.springframework', name: 'org.springframework.beans', version: '3.2.3.RELEASE'
+    compile group: 'org.springframework', name: 'org.springframework.context', version: '3.2.3.RELEASE'
+    compile group: 'org.springframework.security', name: 'spring-security-config', version: '3.2.3.RELEASE'
+    compile group: 'org.springframework', name: 'spring-dao', version: '2.0.8'
+
+
+    compile group: 'org.springframework.security', name: 'spring-security-ldap', version: '3.2.3.RELEASE'
+    compile group: 'org.springframework', name: 'spring-mock', version: '2.0.8'
+
+    compile group: 'org.jasig.cas', name: 'cas-client-core', version: '3.1.10'
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.4'
+
+    compile group: 'net.sf.ehcache', name: 'ehcache-core', version: '1.7.1'
+
+    compile(group: 'opensymphony', name: 'oscache', version: '2.4') {
+        exclude group: 'javax.jms', module: 'jms'
+        exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'javax.servlet', module: 'servlet-api'
+    }
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.8.4'
+
+}
+
+jar {
+    exclude 'conf/**'
+    exclude 'spring/**'
+}
+
+sourceSets {
+    test {
+        java {
+            exclude 'ozone/securitysample/authentication/ldap/**'
+        }
+    }
+}
+
+javadoc {
+    failOnError = false
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+task extrasZip(type: Zip) {
+    from 'src/main/resources/spring'
+    include '**'
+    archiveName "${project.name}-extras-${project.version}.zip"
+    destinationDir(file("${buildDir}/libs/"))
+}
+
+assemble.dependsOn extrasZip
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
