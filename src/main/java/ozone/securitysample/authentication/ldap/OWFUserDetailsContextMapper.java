@@ -1,8 +1,6 @@
 package ozone.securitysample.authentication.ldap;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import java.text.MessageFormat;
 
@@ -12,20 +10,17 @@ import javax.naming.NamingException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.ldap.core.LdapEncoder;
 import org.springframework.ldap.core.LdapTemplate;
-import org.springframework.ldap.core.ContextMapper;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.DirContextAdapter;
 import org.springframework.ldap.core.DirContextOperations;
 import org.springframework.ldap.core.support.LdapContextSource;
-
+import org.springframework.ldap.support.LdapEncoder;
 import org.springframework.security.ldap.userdetails.UserDetailsContextMapper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import ozone.security.authentication.OWFUserDetailsImpl;
-import ozone.security.authorization.model.GrantedAuthorityImpl;
 import ozone.security.authorization.model.OwfGroupImpl;
 import ozone.security.authorization.target.OwfGroup;
 
